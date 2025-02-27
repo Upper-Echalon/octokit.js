@@ -1,6 +1,6 @@
 import { Octokit as OctokitCore } from "@octokit/core";
 import { paginateRest } from "@octokit/plugin-paginate-rest";
-import { paginateGraphql } from "@octokit/plugin-paginate-graphql";
+import { paginateGraphQL } from "@octokit/plugin-paginate-graphql";
 import { restEndpointMethods } from "@octokit/plugin-rest-endpoint-methods";
 import { retry } from "@octokit/plugin-retry";
 import { throttling } from "@octokit/plugin-throttling";
@@ -17,7 +17,7 @@ export type {
 export const Octokit = OctokitCore.plugin(
   restEndpointMethods,
   paginateRest,
-  paginateGraphql,
+  paginateGraphQL,
   retry,
   throttling,
 ).defaults({
@@ -30,7 +30,7 @@ export const Octokit = OctokitCore.plugin(
 
 export type Octokit = InstanceType<typeof Octokit>;
 
-// istanbul ignore next no need to test internals of the throttle plugin
+/* v8 ignore start no need to test internals of the throttle plugin */
 function onRateLimit(
   retryAfter: number,
   options: Required<EndpointDefaults>,
@@ -47,7 +47,6 @@ function onRateLimit(
   }
 }
 
-// istanbul ignore next no need to test internals of the throttle plugin
 function onSecondaryRateLimit(
   retryAfter: number,
   options: Required<EndpointDefaults>,
